@@ -34,6 +34,7 @@ resource "aws_security_group" "wp-elb-tf" {
   tags = {
     Name = "wp-sg-elb-tf"
   }
+}        
     
     
 # ELB
