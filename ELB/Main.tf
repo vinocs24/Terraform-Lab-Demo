@@ -1,7 +1,3 @@
-module "EC2" {
-    source = "./EC2"
-}  
-    
 # ELB
     
 resource "aws_elb" "default" {
