@@ -1,8 +1,8 @@
 resource "aws_db_subnet_group" "default" {
     name        = "wp-db-subnet-tf"
     description = "VPC Subnets"
-    subnet_ids  = ["EC2/aws_subnet.wp-public-tf.id"]
-    subnet_ids  = ["EC2/aws_subnet.wp-private-tf.id"]
+    subnet_ids  = EC2("aws_subnet.wp-public-tf.id,aws_subnet.wp-private-tf.id")
+    
 }
 
 resource "aws_db_instance" "wordpress" {
