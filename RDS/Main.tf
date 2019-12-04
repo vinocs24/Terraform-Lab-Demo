@@ -1,9 +1,6 @@
 resource "aws_db_subnet_group" "default" {
     name        = "wp-db-subnet-tf"
-    description = "VPC Subnets"
-module "EC2" {
-    source = "./EC2"
-}    
+    description = "VPC Subnets"   
     subnet_ids  = flatten([module.aws_subnet.wp-public-tf.id,module.aws_subnet.wp-private-tf.id])
     
 }
