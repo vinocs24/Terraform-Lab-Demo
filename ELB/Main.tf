@@ -1,3 +1,23 @@
+# VPC
+
+resource "aws_vpc" "default" {
+    cidr_block = var.vpc_cidr_block
+
+    tags = {
+       Name = "wp-pvc-tf"
+    }
+}
+
+# Internet Gateway
+
+resource "aws_internet_gateway" "default" {
+    vpc_id = aws_vpc.default.id
+
+    tags = {
+       Name = "wp-igw-tf"
+    }
+}
+
 # Subnets
 
 resource "aws_subnet" "wp-public-tf" {
@@ -9,6 +29,17 @@ resource "aws_subnet" "wp-public-tf" {
        Name = "wp-public-tf"
     }
 }
+
+resource "aws_subnet" "wp-private-tf" {
+    vpc_id            = aws_vpc.default.id
+    cidr_block        = var.private_subnet_cidr_block
+    availability_zone = "us-west-2b"
+
+    tags = {
+       Name = "wp-private-tf"
+    }
+}
+
 
 # SG
 
