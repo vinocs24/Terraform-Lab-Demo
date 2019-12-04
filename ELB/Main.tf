@@ -1,6 +1,6 @@
 # ELB
     
-resource "aws_elb" "default" {
+resource "aws_elb" "terra" {
     name               = "wp-elb-tf"
     subnets            = ["EC2/aws_subnet.wp-public-tf.id"]
     security_groups    = ["EC2/aws_security_group.wp-elb-tf.id"]
