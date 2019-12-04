@@ -1,7 +1,3 @@
-module "ELB" {
-    source = "./ELB"
-}
-
 resource "aws_db_subnet_group" "default" {
     name        = "wp-db-subnet-tf"
     description = "VPC Subnets"
