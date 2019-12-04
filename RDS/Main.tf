@@ -38,6 +38,38 @@ resource "aws_subnet" "wp-private-tf" {
     }
 }
 
+resource "aws_security_group" "wp-db-sg-tf" {
+  name        = "wp-db-tf"
+  description = "Access to the RDS instances from the VPC"
+  vpc_id      = aws_vpc.default.id
+
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  ingress {
+    from_port   = 8
+    to_port     = 0
+    protocol    = "icmp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "wp-db-sg-tf"
+  }
+}
+
+
 resource "aws_db_subnet_group" "default" {
     name        = "wp-db-subnet-tf"
     description = "VPC Subnets"
