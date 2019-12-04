@@ -58,7 +58,7 @@ resource "aws_elb" "default" {
         interval            = 30
     }
 
-    instances                   = "EC2/aws_instance.ec2-instance.*.id"
+    instances                   = ("EC2/aws_instance.ec2-instance.*.id")
     cross_zone_load_balancing   = true
     idle_timeout                = 100
     connection_draining         = true
