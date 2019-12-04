@@ -11,3 +11,15 @@ terraform {
 provider "aws" {
   region = "us-west-2"
 }
+
+module "EC2" {
+    source = "./EC2"
+}
+
+module "ELB" {
+    source = "./ELB"
+}
+
+module "RDS" {
+  source  = "./RDS"
+}
