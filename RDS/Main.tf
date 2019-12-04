@@ -1,7 +1,7 @@
 # Subnets
 
 resource "aws_subnet" "wp-public-tf" {
-    vpc_id            = ["EC2/aws_vpc.default.id"]
+    vpc_id            = "EC2/aws_vpc.default.id"
     cidr_block        = var.public_subnet_cidr_block
     availability_zone = "us-west-2a"
 
