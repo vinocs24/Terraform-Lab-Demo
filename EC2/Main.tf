@@ -4,7 +4,7 @@ resource "aws_instance" "ec2-instance" {
     ami                         = var.ami
     instance_type               = var.instance_type
     availability_zone           = "us-west-2a"
-    subnet_id                   = "VPC/aws_subnet.wp-public-tf.id"
+    subnet_id                   = aws_subnet.wp-public-tf.id
     key_name                    = var.key_name
     associate_public_ip_address = true
     security_groups             = [aws_security_group.wp-sg-tf.id]
@@ -20,7 +20,7 @@ resource "aws_instance" "ec2-instance" {
 resource "aws_security_group" "wp-sg-tf" {
   name        = "wp-instance-tf"
   description = "Security group for EC2 Instances"
-  vpc_id      = "VPC/aws_vpc.default.id"
+  vpc_id      = aws_vpc.default.id
 
   ingress {
     from_port   = 80
@@ -51,20 +51,20 @@ resource "aws_security_group" "wp-sg-tf" {
 resource "aws_security_group" "wp-db-sg-tf" {
   name        = "wp-db-tf"
   description = "Access to the RDS instances from the VPC"
-  vpc_id      = "VPC/aws_vpc.default.id"
+  vpc_id      = aws_vpc.default.id
 
   ingress {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["VPC/var.vpc_cidr_block"]
+    cidr_blocks = [var.vpc_cidr_block]
   }
 
   ingress {
     from_port   = 8
     to_port     = 0
     protocol    = "icmp"
-    cidr_blocks = ["VPC/var.vpc_cidr_block"]
+    cidr_blocks = [var.vpc_cidr_block]
   }
 
   egress {
@@ -82,7 +82,7 @@ resource "aws_security_group" "wp-db-sg-tf" {
 resource "aws_security_group" "wp-elb-tf" {
   name        = "wp-sg-elb-tf"
   description = "Security Group for the ELB"
-  vpc_id      = "VPC/aws_vpc.default.id"
+  vpc_id      = aws_vpc.default.id
 
   ingress {
     from_port   = 80
