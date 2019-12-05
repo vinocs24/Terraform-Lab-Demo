@@ -20,7 +20,7 @@ resource "aws_instance" "ec2-instance" {
 resource "aws_security_group" "wp-sg-tf" {
   name        = "wp-instance-tf"
   description = "Security group for EC2 Instances"
-  vpc_id      = var.aws_vpc.default.id
+  vpc_id      = "var.aws_vpc.default.id"
 
   ingress {
     from_port   = 80
@@ -51,7 +51,7 @@ resource "aws_security_group" "wp-sg-tf" {
 resource "aws_security_group" "wp-db-sg-tf" {
   name        = "wp-db-tf"
   description = "Access to the RDS instances from the VPC"
-  vpc_id      = var.aws_vpc.default.id
+  vpc_id      = "var.aws_vpc.default.id"
 
   ingress {
     from_port   = 3306
@@ -82,7 +82,7 @@ resource "aws_security_group" "wp-db-sg-tf" {
 resource "aws_security_group" "wp-elb-tf" {
   name        = "wp-sg-elb-tf"
   description = "Security Group for the ELB"
-  vpc_id      = var.aws_vpc.default.id
+  vpc_id      = "var.aws_vpc.default.id"
 
   ingress {
     from_port   = 80
