@@ -19,8 +19,8 @@ module "VPC" {
 module "EC2" {
     source = "./EC2"
     
-    subnet_id   = "module.aws_subnet.wp-public-tf.id"
-    vpc_id      = "module.aws_vpc.default.id"
+    subnet_id   = ["module.aws_subnet.wp-public-tf.id"]
+    vpc_id      = ["module.aws_vpc.default.id"]
     
 }
 
